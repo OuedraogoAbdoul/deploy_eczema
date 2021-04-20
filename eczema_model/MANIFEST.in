@@ -1,0 +1,16 @@
+include *.txt
+include *.md
+include *.cfg
+include *.pkl
+recursive-include ./eczema_model/*
+
+include eczema_model/data/train.csv
+include eczema_model/data/test.csv
+include eczema_model/model_saved/*.pkl
+include eczema_model/VERSION
+
+include ./requirement.txt
+exclude *.log
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]`
