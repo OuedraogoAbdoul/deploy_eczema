@@ -11,7 +11,7 @@ from setuptools import find_packages, setup
 # Package meta-data.
 NAME = 'eczema_model'
 DESCRIPTION = '"Deployment of Machine Learning eczema_model Models".'
-URL = 'https://github.com/OuedraogoAbdoul/deploy_ml_model'
+URL = 'https://github.com/OuedraogoAbdoul/deploy_eczema'
 EMAIL = 'abdoul@gmail.com'
 AUTHOR = 'Ouedraogo'
 REQUIRES_PYTHON = '>=3.8.0'
@@ -55,7 +55,7 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=find_packages(exclude=('tests',)),
-    package_data={'regression_model': ['VERSION']},
+    package_data={'eczema_model': ['VERSION']},
     install_requires=list_reqs(),
     extras_require={},
     include_package_data=True,

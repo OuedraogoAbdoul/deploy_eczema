@@ -1,4 +1,4 @@
-# from regression_model.regression_model.data import config
+# from eczema_model.eczema_model.data import config
 
 # print(config.PATHDATA)
 

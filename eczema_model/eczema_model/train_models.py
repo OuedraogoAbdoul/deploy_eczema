@@ -1,6 +1,6 @@
-from regression_model import pipeline as pipeline
-from regression_model.config import config
-from regression_model.get_data import read_data
+from eczema_model import pipeline as pipeline
+from eczema_model.config import config
+from eczema_model.get_data import read_data
 
 import pandas as pd
 

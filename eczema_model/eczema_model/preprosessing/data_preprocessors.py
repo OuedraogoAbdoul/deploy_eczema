@@ -1,8 +1,8 @@
 from sklearn.model_selection import train_test_split
 from sklearn.base import BaseEstimator, TransformerMixin
-from regression_model.get_data import read_data
+from eczema_model.get_data import read_data
 import pandas as pd
-from regression_model.config import config
+from eczema_model.config import config
 
 
 class SplitTrainTest(BaseEstimator, TransformerMixin):

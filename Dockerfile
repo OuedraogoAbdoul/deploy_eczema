@@ -7,7 +7,7 @@ ADD . /usr/src/ml_app/
 RUN pip install --upgrade pip
 RUN  python3.8 -m pip install --upgrade pip
 
-RUN pip install -r /usr/src/ml_app/regression_model/requirement.txt
+RUN pip install -r /usr/src/ml_app/eczema_model/requirement.txt
 RUN pip install notebook
 
 EXPOSE 5000

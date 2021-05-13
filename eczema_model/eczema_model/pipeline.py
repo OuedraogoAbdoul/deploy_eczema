@@ -1,8 +1,8 @@
-from regression_model.config import config
+from eczema_model.config import config
 from sklearn.pipeline import Pipeline, make_pipeline, FeatureUnion
 
-from regression_model.get_data import read_data
-from regression_model.preprosessing import data_preprocessors as pp
+from eczema_model.get_data import read_data
+from eczema_model.preprosessing import data_preprocessors as pp
 
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
