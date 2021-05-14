@@ -5,4 +5,6 @@ from pathlib import Path
 ROOT = f"{Path(__file__).resolve().parents[2]}"
 ROOT = ROOT.split("/")[-1]
 
-print(ROOT)
+TRAIN = ROOT + "/data/train"
+VALID = ROOT + "/data/val"
+# print(VALID)

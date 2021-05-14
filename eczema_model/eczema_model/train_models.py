@@ -1,8 +1,8 @@
+import pandas as pd
+
 from eczema_model import pipeline as pipeline
 from eczema_model.config import config
 from eczema_model.get_data import read_data
-
-import pandas as pd
 
 
 def train_models():

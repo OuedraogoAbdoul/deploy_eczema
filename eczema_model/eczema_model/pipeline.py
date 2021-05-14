@@ -1,18 +1,12 @@
-from eczema_model.config import config
-from sklearn.pipeline import Pipeline, make_pipeline, FeatureUnion
-
-from eczema_model.get_data import read_data
-from eczema_model.preprosessing import data_preprocessors as pp
-
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.impute import SimpleImputer, MissingIndicator
-
+from sklearn.impute import MissingIndicator, SimpleImputer
 from sklearn.linear_model import Lasso
+from sklearn.pipeline import FeatureUnion, Pipeline, make_pipeline
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 
-
+from eczema_model.config import config
+from eczema_model.get_data import read_data
+from eczema_model.preprosessing import data_preprocessors as pp
 
 transformer = FeatureUnion(
   transformer_list=[

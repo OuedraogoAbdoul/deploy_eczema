@@ -1,4 +1,4 @@
-from eczema_model.config.config import TRAININGDATA, WRONGDATAPATH, DATA
+from eczema_model.config.config import DATA, TRAININGDATA, WRONGDATAPATH
 
 
 def test_TRAININGDATA():
