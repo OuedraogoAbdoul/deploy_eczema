@@ -11,4 +11,5 @@ VALID = ROOT + "/data/val"
 
 BATCHSIZE = 20
 NUMWORKERS = 0
+NUMEPOCHS = 55
 # print(VALID)

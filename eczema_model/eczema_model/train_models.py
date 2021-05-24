@@ -1,10 +1,12 @@
 
 from __future__ import print_function, division
+from PIL.Image import NONE
 
 
 import pandas as pd
 import model as ml
 from eczema_model import pipeline as pipeline
+from eczema_model.config import config
 
 
 import torch
@@ -19,27 +21,14 @@ import time
 import os
 import copy
 
-
-def train_models():
-    #classes are folders in each directory with these names
-    classes = ['Atopic dermatitis', 'Neurodermatitis', 'Stasis dermatitis','Contact dermatitis',
-      'Nummular eczema','Dyshidrotic eczema', 'Seborrheic dermatitis']
-
-
-    train_loader = ml.load_datsets()
-
-    # Visualize some sample data
-    ml.visualize_sample_images(train_loader, classes)
-
-
-    # Load pretained model
-    mobile_net = ml.load_pretrained_model(display_arch=True)
-
-
-
-    return train_loader
+def train_evaluate():
+    dataloaders, dataset_sizes, class_names = ml.load_datsets()
+    model, criterion, optimizer, scheduler  = ml.loss_function_optimzer()
+    model_ft = ml.train_model(model, criterion, optimizer, scheduler, dataset_sizes, dataloaders)
+    
+    return NONE
 
 if __name__ == "__main__":
     print("Processing Train_models")
-    df = train_models()
+    df = train_evaluate()
     # print("Data splitting completed: ", df.head())
