@@ -4,9 +4,6 @@ from sklearn.pipeline import FeatureUnion, Pipeline, make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 
-from eczema_model.config import config
-from eczema_model.get_data import read_data
-from eczema_model.preprosessing import data_preprocessors as pp
 
 transformer = FeatureUnion(
   transformer_list=[

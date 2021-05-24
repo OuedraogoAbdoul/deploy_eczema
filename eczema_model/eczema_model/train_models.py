@@ -1,24 +1,45 @@
-import pandas as pd
 
+from __future__ import print_function, division
+
+
+import pandas as pd
+import model as ml
 from eczema_model import pipeline as pipeline
-from eczema_model.config import config
-from eczema_model.get_data import read_data
+
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.optim import lr_scheduler
+import numpy as np
+import torchvision
+from torchvision import datasets, models, transforms
+import matplotlib.pyplot as plt
+import time
+import os
+import copy
 
 
 def train_models():
-    train, valid = read_data()
-    train.reset_index()
-    valid.reset_index()
-    
-    train = train.drop(["Date", "Volume"], axis=1)
-    valid = valid.drop(["Date", "Volume"], axis=1)
+    #classes are folders in each directory with these names
+    classes = ['Atopic dermatitis', 'Neurodermatitis', 'Stasis dermatitis','Contact dermatitis',
+      'Nummular eczema','Dyshidrotic eczema', 'Seborrheic dermatitis']
 
-    print(train.head())
-    
-    pipeline.btc_price_pipeline.fit(train, valid)
 
-    return train
+    train_loader = ml.load_datsets()
+
+    # Visualize some sample data
+    ml.visualize_sample_images(train_loader, classes)
+
+
+    # Load pretained model
+    mobile_net = ml.load_pretrained_model(display_arch=True)
+
+
+
+    return train_loader
 
 if __name__ == "__main__":
+    print("Processing Train_models")
     df = train_models()
     # print("Data splitting completed: ", df.head())
