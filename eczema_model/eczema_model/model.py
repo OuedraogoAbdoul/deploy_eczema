@@ -60,30 +60,57 @@ def load_datsets():
     return dataloaders, dataset_sizes, class_names
 
 
+#Save model
+def save_model(model, epoch, loss, optimizer):
+    torch.save(model.state_dict(), "mobilenetv3small.pth")
+# torch.save({
+#                 'epoch': epoch,
+#                 'model_state_dict': model.state_dict(),
+#                 'optimizer_state_dict': optimizer.state_dict(),
+#                 'loss': loss,
+#                 }, "mobilenetv3small.pth")
+
+
+#load model
+def load_checkpoint(modelpath, model):
+    checkpoint = torch.load(modelpath)
+    model.load_state_dict(checkpoint['model_state_dict'])
+    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    epoch = checkpoint['epoch']
+    loss = checkpoint['loss']
+
+    model.eval()
+    # - or -
+    model.train()
+    
+    return model
+
+
+
 # Select pretrained model
 def load_pretrained_model(display_arch=False):
-    mobilenet_v2 = models.mobilenet_v2(pretrained=True)
+    mobilenet_v2 = models.resnet18(pretrained=True)
     if(display_arch):
         print(mobilenet_v2)
 
     return mobilenet_v2
 
 def freezing_pretrained_model(model, class_names):
-    for param in model.features.parameters():
-        param.requires_grad = False
+    # for param in model.parameters():
+    #     param.requires_grad = False
 
-    n_inputs = model.classifier[1].in_features
+    n_inputs = model.fc.in_features
 
     last_layer = nn.Linear(n_inputs, len(class_names))
 
-    model.classifier[1] = last_layer
+    model.fc = last_layer
 
     # if GPU is available, move the model to GPU
     if Is_gpu_avaliable():
         model.cuda()
 
     # check to see that your last layer produces the expected number of outputs
-    print("The number of ouput classes are: ", model.classifier[1].out_features)
+    print("The number of ouput classes are: ", model.fc.out_features)
 
     return model 
 
@@ -159,10 +186,12 @@ def train_model(model, criterion, optimizer, scheduler, dataset_size, dataloader
 
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                 phase, epoch_loss, epoch_acc))
-
+            
             # deep copy the model
             if phase == 'val' and epoch_acc > best_acc:
                 best_acc = epoch_acc
+                # torch.save(model.state_dict(), "eczema_model\mobilenetv3small.pth")
+                save_model(model, epoch_acc, epoch_loss, optimizer)
                 best_model_wts = copy.deepcopy(model.state_dict())
 
         print()
@@ -175,6 +204,7 @@ def train_model(model, criterion, optimizer, scheduler, dataset_size, dataloader
     # load best model weights
     model.load_state_dict(best_model_wts)
     return model
+
 
 def loss_function_optimzer():
 
